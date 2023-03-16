@@ -8,6 +8,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'spotify';
 
+  
+}
+  /*
   status: string | number = 0
 
   name: string = 'spotify'
@@ -55,3 +58,4 @@ interface CarModel {
   model: string
   year?: number
 }
+*/

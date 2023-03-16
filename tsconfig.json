@@ -2,6 +2,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+
+    //Importa el json en un lado que se sea necessario
+    "resolveJsonModule": true,
+
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
