@@ -10,6 +10,7 @@ export class AppComponent {
 
   
 }
+
   /*
   status: string | number = 0
 
