@@ -1,1 +1,28 @@
-<p>media-player works!</p>
+<div class="media-player">
+    <div class="media-player--wrapper ">
+        <!--Zona del artista-->
+        <div class="artist player-center">
+            <ng-container *ngTemplateOutlet="artistZone"></ng-container>
+        </div>
+        <!--Zona del reproductor-->
+      
+    </div>
+</div>
+
+<!-- ZONE TEMPLATES -->
+
+<ng-template #artistZone>
+    <div class="artist-inside" *ngIf="true">
+
+        <img [src]="mockCover.cover" alt="" class="cover">
+        <div class="track-info">
+            <h3 class="track-title">{{mockCover.name}}</h3>
+            <h5 class="track-title sub-title"></h5>
+        </div>
+        <div class="track-like">
+            <button class="btn-like">
+                <i class="uil uil-heart"></i>
+            </button>
+        </div>
+    </div>
+</ng-template>
