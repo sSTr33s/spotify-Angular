@@ -4,7 +4,7 @@ import { Directive,ElementRef,HostListener, Input } from '@angular/core';
   selector: 'img[appImgBroken]'
 })
 export class ImgBrokenDirective {
-  @Input() linkImgBroken:string = ''
+  @Input() linkImgBroken!:string
 
   //Escuchar img y se dispara
   @HostListener('error') hadleError(): void{
