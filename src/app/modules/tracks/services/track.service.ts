@@ -64,7 +64,6 @@ export class TrackService {
           const {status,statusTest} = err
           console.log("Algo no va bien",[status,statusTest])
           return of([])
-
         })
       );
     }
@@ -72,6 +71,7 @@ export class TrackService {
       return this.httpClient.get(`${this.URL}/tracks`)
       .pipe(map(({data}:any)=>data));
     }
+    
     getAllRandom2$():Observable<any>{
       return this.httpClient.get(`${this.URL}/tracks`).pipe(
         //Para trabajar con una promesa

@@ -1,6 +1,8 @@
 import { Component,OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -8,10 +10,10 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
-  formLogin!: FormGroup;
+  sessionError: boolean = false
+  formLogin!: FormGroup
 
-  constructor(private asServiceAuth:AuthService){
-
+  constructor(private asServiceAuth:AuthService,private cookie:CookieService){
   }
 
   ngOnInit(): void {
@@ -32,6 +34,27 @@ export class LoginPageComponent implements OnInit {
     //const body=this.formLogin.value
     //console.log(body)
     const {email,password}=this.formLogin.value
-    this.asServiceAuth.sendCredentials(email,password)
+    this.asServiceAuth.sendCredentials(email,password).subscribe(
+      responseOk=>{
+        this.cookie.set("token",responseOk);
+        const {tokenSession,data}=responseOk
+        console.log("Sesión iniciada correctamente: ",responseOk)
+      },err=>{
+        this.sessionError=true
+        console.log("Sesión no iniciada")
+      }
+      );
+  }
+
+  async sL():Promise<any>{
+    try{
+      const {email,password}=this.formLogin.value
+      const responseOk= await firstValueFrom(this.asServiceAuth.sendCredentials(email,password))
+      this.cookie.set("token-v2",responseOk)
+      console.log("Sesión iniciada")  
+    }catch(err){
+      console.log("Sesión no iniciada bummm")
+    }
+    
   }
 }
