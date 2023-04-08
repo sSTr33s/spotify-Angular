@@ -16,7 +16,7 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     url:'',
     _id:1
   }
-
+  
   listOberservs!: Array<Subscription>
 
   constructor(private multimediaService:MultimediaService){
