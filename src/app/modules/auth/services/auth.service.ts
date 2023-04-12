@@ -18,10 +18,10 @@ export class AuthService {
     email,
     password
    }
-   
+
     return this.HttpClient.post(`${this.URL}/auth/login`,body).pipe(
       tap((responseO:any)=>{
-        this.cookie.set("token",responseO,4,'/');
+        this.cookie.set("token_v2",responseO,4,'/');
         const {tokenSession,data}=responseO
         console.log("Sesión iniciada correctamente: ",tokenSession)
     }

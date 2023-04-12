@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { firstValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -13,7 +14,7 @@ export class LoginPageComponent implements OnInit {
   sessionError: boolean = false
   formLogin!: FormGroup
 
-  constructor(private asServiceAuth:AuthService,private cookie:CookieService){
+  constructor(private asServiceAuth:AuthService,private cookie:CookieService,private router:Router){
   }
 
   ngOnInit(): void {
@@ -52,9 +53,9 @@ export class LoginPageComponent implements OnInit {
       const responseOk= await firstValueFrom(this.asServiceAuth.sendCredentials(email,password))
       this.cookie.set("token-v2",responseOk)
       console.log("Sesión iniciada")  
+      this.router.navigate(['/','tracks'])
     }catch(err){
       console.log("Sesión no iniciada bummm")
-    }
-    
+    }    
   }
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { HomePageComponent } from './modules/home/pages/home-page/home-page.component';
+import { SessionGuard } from '@core/guard/session.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
   {
     path:'',                                          //Necesitamos que las módules que importemos tengan rutas
     component:HomePageComponent,
-    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule)
+    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
+    canActivate:[SessionGuard]
   }
 ];
 
