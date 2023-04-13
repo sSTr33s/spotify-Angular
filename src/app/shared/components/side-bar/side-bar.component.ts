@@ -39,7 +39,7 @@ export class SideBarComponent implements OnInit {
     {
       name: 'Buscar',
       icon: 'uil uil-search',
-      router: ['/', 'tracks']
+      router: ['/', 'history']
     },
     {
       name: 'Tu biblioteca',

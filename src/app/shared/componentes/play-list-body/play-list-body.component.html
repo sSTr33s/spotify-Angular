@@ -5,7 +5,7 @@
         <li class="play-list-table-header_item">fecha incorporación 🍌😁</li>
         <li class="play-list-table-header_item"><i class="uil uil-clock-eight"></i></li>
     </ul>
-    <ul class="play-list-rows" *ngFor="let track of tracks|orderList:optionSort.property:optionSort.sort">
+    <ul class="play-list-rows" *ngFor="let track of tracks|orderList:optionSort.property:optionSort.sort ">
         <li class="track-name">
             <ng-container *ngTemplateOutlet="coverSection;context:{track:track}"></ng-container>
         </li>
