@@ -11,9 +11,10 @@ export class MultimediaService {
 
   public trackInfo$: BehaviorSubject<any> = new BehaviorSubject(undefined);
 
-  public timeElapsed$: BehaviorSubject<any> = new BehaviorSubject('00:00');
-  public timeRemaining$: BehaviorSubject<any> = new BehaviorSubject('-00:00');
+  public timeElapsed$: BehaviorSubject<string> = new BehaviorSubject('00:00');
+  public timeRemaining$: BehaviorSubject<string> = new BehaviorSubject('-00:00');
   public playerStatus$: BehaviorSubject<string> = new BehaviorSubject('paused')
+  public playerPercentage$: BehaviorSubject<number> = new BehaviorSubject(0)
 
   public audio!: HTMLAudioElement;
 
@@ -67,6 +68,16 @@ export class MultimediaService {
     //console.table({ duration, currentTime });
     this.setTimeElapsed(currentTime);
     this.setTimeRemaining(currentTime, duration);
+    this.setProcentage(currentTime, duration);
+    
+  }
+
+  private setProcentage(currentTime: number, duration: number): void {
+    //TODO duration ---> 100%
+    //TODO currentTime ---> (x)
+    //TODO (currentTime * 100) / duration
+
+    this.playerPercentage$.next((currentTime*100)/duration);
   }
 
   private setTimeElapsed(currentTime: number): void {
