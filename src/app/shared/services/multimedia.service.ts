@@ -60,33 +60,43 @@ export class MultimediaService {
     }
   }
 
-  private calculateTime = () => {
-
+  private calculateTime = () => 
+  {
     // console.log('reproduciendo');
     const { duration, currentTime } = this.audio;
 
     //console.table({ duration, currentTime });
     this.setTimeElapsed(currentTime);
     this.setTimeRemaining(currentTime, duration);
-    this.setProcentage(currentTime, duration);
-    
+    this.setProcentage(currentTime, duration); 
   }
 
-  private setProcentage(currentTime: number, duration: number): void {
+  public seekAudio(percentage:number):void {
+    const {duration}=this.audio;
+
+    const percentageToSeconds= (percentage * duration) / 100;
+
+    this.audio.currentTime = percentageToSeconds;
+  }
+
+  private setProcentage(currentTime: number, duration: number): void 
+  {
+    this.playerPercentage$.next((currentTime*100)/duration);
+  }
+
     //TODO duration ---> 100%
     //TODO currentTime ---> (x)
     //TODO (currentTime * 100) / duration
-
-    this.playerPercentage$.next((currentTime*100)/duration);
-  }
 
   private setTimeElapsed(currentTime: number): void {
 
     this.timeElapsed$.next(this.displayFormatedDuration(currentTime));
   }
 
-  private setTimeRemaining(currentTime: number, duration: number): void {
+  private setTimeRemaining(currentTime: number, duration: number): void 
+  {
     let timeLeft = duration - currentTime;
+
     this.timeRemaining$.next(this.displayFormatedDuration(timeLeft));
   }
 
